@@ -1,0 +1,91 @@
+int hauteur = 3;
+int longueur = 3;
+
+byte Matrice[longueur][hauteur];
+
+int leds[] = {13, 12, 11, 10, 9, 8,7,6,5};
+
+int n = 0;
+
+int seuil_gauche = 300;
+int seuil_droit = 700;
+int seuil_haut = 700;
+int seuil_bas = 300;
+
+void setup() {
+  // put your setup code here, to run once:
+  for (int x = 0; x < 3; x++) {
+    for (int y = 0; y <3; y++) {
+      Matrice[x][y] = pinMode(leds[n],OUTPUT);
+      n++;
+    }
+  }
+
+  pinMode(A0,INPUT);
+  pinMode(A1,INPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  int Axe_x = analogRead(A0);
+  int Axe_y = analogRead(A1);
+  int x = 0;
+  int y = 0;
+  bool temoin_hori = true
+  bool temoin_vert = true
+
+  if (Axe_x > seuil_droit && temoin_hori = true) {
+    digitalWrite(Matrice[x][y],LOW)
+    temoin_hori = false;
+
+    x++;
+    if (x > 3){
+      x= 0;
+    }  
+    digitalWrite(Matrice[x][y],HIGH);
+    delay(50);
+  }
+
+  if (Axe_x < seuil_gauche && temoin_hori = true) {
+    temoin_hori = false;
+    digitalWrite(Matrice[x][y],LOW)
+    x--;
+    if (x < 0){
+      x= 3;
+    }  
+    digitalWrite(Matrice[x][y],HIGH);
+    delay(50);
+  }
+
+  if (Axe_y > seuil_haut && temoin_vert = true) {
+    temoin_vert = false;
+    digitalWrite(Matrice[x][y],LOW)
+    y++;
+    if (y > 3){
+      y= 0;
+    }  
+    digitalWrite(Matrice[x][y],HIGH);
+    delay(50);
+  }
+
+  if (Axe_y < seuil_bas && temoin_vert = true) {
+    temoin_vert = false;
+    digitalWrite(Matrice[x][y],LOW)
+    y++;
+    if (y < 0){
+      y= 3;
+    }  
+    digitalWrite(Matrice[x][y],HIGH);
+    delay(50);
+  }
+
+  if(Axe_x > 300 && Axe_x < 700){
+    temoin_hori = true;
+  }
+
+  if(Axe_y > 300 && Axe_y < 700){
+    temoin_vert = true;
+  }
+
+}
